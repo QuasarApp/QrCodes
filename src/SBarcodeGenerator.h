@@ -21,8 +21,8 @@ class SBarcodeGenerator : public QQuickItem
     Q_PROPERTY(QString fileName MEMBER _fileName NOTIFY fileNameChanged)
     Q_PROPERTY(ZXing::BarcodeFormat format MEMBER _format)
     Q_PROPERTY(QString extension MEMBER _extension)
-    Q_PROPERTY(QString filePath MEMBER _filePath)
-    Q_PROPERTY(QString inputText MEMBER _inputText)
+    Q_PROPERTY(QString filePath MEMBER _filePath NOTIFY filePathChanged)
+    Q_PROPERTY(QString inputText MEMBER _inputText NOTIFY imputTextChanged)
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
         QML_ELEMENT
 #endif
@@ -47,6 +47,8 @@ signals:
     void eccLevelChanged(int eccLevel);
 
     void fileNameChanged(QString fileName);
+    void filePathChanged(QString fileName);
+    void imputTextChanged(QString text);
 
 private:
     int _width = 500;

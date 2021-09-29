@@ -24,6 +24,7 @@ bool SBarcodeGenerator::process(const QString &inputString)
     _bitmap = ZXing::ToMatrix<uint8_t>(writer.encode(ZXing::TextUtfEncoding::FromUtf8(inputString.toStdString()), _width, _height));
 
     _filePath = QDir::tempPath() + "/" + _fileName + "." + _extension;
+    emit filePathChanged(_filePath);
 
     if (_extension == "png") {
         stbi_write_png(_filePath.toStdString().c_str(), _bitmap.width(), _bitmap.height(), 1, _bitmap.data(), 0);
