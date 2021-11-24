@@ -21,6 +21,7 @@ public:
 
 public slots:
     void process(const QImage capturedImage);
+    void process(const QString& pathToImg);
 
 signals:
     void isDecodingChanged(bool isDecoding);

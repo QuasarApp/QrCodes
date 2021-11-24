@@ -105,6 +105,10 @@ SBarcodeDecoder *SBarcodeFilter::getDecoder() const
     return _decoder;
 }
 
+void SBarcodeFilter::process(const QString& filePath) const {
+    getDecoder()->process(filePath);
+}
+
 QFuture<void> SBarcodeFilter::getImageFuture() const
 {
     return _imageFuture;

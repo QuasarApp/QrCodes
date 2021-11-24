@@ -22,6 +22,8 @@ class SBarcodeGenerator : public QQuickItem
     Q_PROPERTY(ZXing::BarcodeFormat format MEMBER _format)
     Q_PROPERTY(QString extension MEMBER _extension)
     Q_PROPERTY(QString filePath MEMBER _filePath NOTIFY filePathChanged)
+    Q_PROPERTY(QString exportDir MEMBER _exportDir NOTIFY exportDirhChanged)
+    Q_PROPERTY(QString exportFilePath MEMBER _exportFilePath NOTIFY exportFilePathChanged)
     Q_PROPERTY(QString inputText MEMBER _inputText NOTIFY imputTextChanged)
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
         QML_ELEMENT
@@ -49,6 +51,8 @@ signals:
     void fileNameChanged(QString fileName);
     void filePathChanged(QString fileName);
     void imputTextChanged(QString text);
+    void exportFilePathChanged(QString path);
+    void exportDirhChanged(QString path);
 
 private:
     int _width = 500;
@@ -59,6 +63,8 @@ private:
     QString _extension = "png";
     QString _fileName = "code";
     QString _filePath = "";
+    QString _exportFilePath = "";
+    QString _exportDir = "";
     QString _inputText = "";
     ZXing::Matrix<uint8_t> _bitmap = ZXing::Matrix<uint8_t>();
 };

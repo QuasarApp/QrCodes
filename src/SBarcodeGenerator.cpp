@@ -9,9 +9,9 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-SBarcodeGenerator::SBarcodeGenerator()
-{
-
+SBarcodeGenerator::SBarcodeGenerator() {
+    _exportDir = QStandardPaths::writableLocation(
+                QStandardPaths::DocumentsLocation);
 }
 
 bool SBarcodeGenerator::process(const QString &inputString)
@@ -56,11 +56,10 @@ bool SBarcodeGenerator::saveImage()
     }
 #endif
 
-    QString docFolder = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/" + _fileName + "." + _extension;
+    _exportFilePath = _exportDir + "/" + _fileName + "." + _extension;
+    emit exportFilePathChanged(_exportFilePath);
 
-    QFile::copy(_filePath, docFolder);
-
-    return true;
+    return QFile::copy(_filePath, _exportFilePath);
 }
 
 void SBarcodeGenerator::barcodeFormatFromQMLString(const QString &format)

@@ -25,6 +25,7 @@ public:
     void setCaptureRect(const QRectF &captureRect);
 
     SBarcodeDecoder *getDecoder() const;
+    Q_INVOKABLE void process(const QString &filePath) const;
     QFuture<void> getImageFuture() const;
 
     QVideoFilterRunnable * createFilterRunnable() override;
