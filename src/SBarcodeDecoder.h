@@ -20,8 +20,7 @@ public:
     static QImage imageFromVideoFrame(const QVideoFrame &videoFrame);
 
 public slots:
-    void process(const QImage capturedImage);
-    void process(const QString& pathToImg);
+    bool process(const QImage capturedImage);
 
 signals:
     void isDecodingChanged(bool isDecoding);

@@ -7,6 +7,7 @@
 #include <QOpenGLFunctions>
 #include <iostream>
 
+#include <QPixmap>
 #include <QUrl>
 #include <ReadBarcode.h>
 #define STB_IMAGE_IMPLEMENTATION
@@ -117,8 +118,11 @@ bool SBarcodeDecoder::isDecoding() const
     return _isDecoding;
 }
 
-void SBarcodeDecoder::process(const QImage capturedImage)
+bool SBarcodeDecoder::process(const QImage capturedImage)
 {
+    if (capturedImage.isNull())
+        return false;
+
     setIsDecoding(true);
 
     const auto hints = DecodeHints()
@@ -138,10 +142,8 @@ void SBarcodeDecoder::process(const QImage capturedImage)
     }
 
     setIsDecoding(false);
-}
 
-void SBarcodeDecoder::process(const QString &pathToImg) {
-    process(QImage(QUrl(pathToImg).path()));
+    return true;
 }
 
 QImage SBarcodeDecoder::videoFrameToImage(QVideoFrame &videoFrame, const QRect &captureRect)
