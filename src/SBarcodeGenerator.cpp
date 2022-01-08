@@ -61,6 +61,8 @@ bool SBarcodeGenerator::saveImage()
 
     if (QFileInfo::exists(_exportFilePath)) {
         QFile::remove(_exportFilePath);
+    } else {
+        QDir().mkpath(QFileInfo(_exportFilePath).absolutePath());
     }
 
     return QFile::copy(_filePath, _exportFilePath);
