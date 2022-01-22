@@ -15,6 +15,7 @@ else()
     option (BUILD_SHARED_LIBS "Build and link as shared library" ON)
 endif()
 
+message ("zxong-cpp BUILD_SHARED_LIBS": ${BUILD_SHARED_LIBS})
 if (MSVC)
     option (LINK_CPP_STATICALLY "MSVC only, link standard library statically (/MT and /MTd)" OFF)
 
