@@ -10,8 +10,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (NOT DEFINED BUILD_SHARED_LIBS)
-    set(BUILD_SHARED_LIBS ON)
+if (WIN32)
+    option (BUILD_SHARED_LIBS "Build and link as shared library" OFF)
+else()
+    option (BUILD_SHARED_LIBS "Build and link as shared library" ON)
 endif()
 
 option (BUILD_EXAMPLES "Build the example barcode reader/writer applicatons" OFF)
