@@ -21,7 +21,13 @@ bool SBarcodeGenerator::process(const QString &inputString)
     }
     else {
     ZXing::MultiFormatWriter writer = ZXing::MultiFormatWriter(_format).setMargin(_margin).setEccLevel(_eccLevel);
-    _bitmap = ZXing::ToMatrix<uint8_t>(writer.encode(ZXing::TextUtfEncoding::FromUtf8(inputString.toStdString()), _width, _height));
+
+    try {
+        _bitmap = ZXing::ToMatrix<uint8_t>(writer.encode(ZXing::TextUtfEncoding::FromUtf8(inputString.toStdString()), _width, _height));
+    } catch (const std::exception& err) {
+        qWarning() << err.what();
+        return false;
+    }
 
     _filePath = QDir::tempPath() + "/" + _fileName + "." + _extension;
     emit filePathChanged(_filePath);
